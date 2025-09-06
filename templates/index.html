@@ -29,7 +29,7 @@
         <div class="content">
           <div style="display:flex; justify-content:space-between; align-items:center;">
             <h3 style="margin:0;">{{ p.title }}</h3>
-            <span class="price">${{ '%.2f'|format(p.price) }}</span>
+            <span class="price">{{ '%.2f'|format(p.price) }}</span>
           </div>
           <div class="muted">{{ p.category }}</div>
         </div>

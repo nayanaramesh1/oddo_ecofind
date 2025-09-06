@@ -18,7 +18,7 @@
                   <div>x{{ it.quantity }}</div>
                 </div>
                 <div class="muted">{{ it.product_category }}</div>
-                <div>${{ '%.2f'|format(it.product_price) }}</div>
+                <div>{{ '%.2f'|format(it.product_price) }}</div>
               </div>
             </div>
           {% endfor %}
