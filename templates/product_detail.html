@@ -1,0 +1,20 @@
+{% extends "_base.html" %}
+{% block content %}
+  <div class="card" style="display:grid; grid-template-columns: 1fr 1fr;">
+    <img src="{{ product.image() }}" alt="{{ product.title }}">
+    <div class="content">
+      <h2 style="margin-top:0;">{{ product.title }}</h2>
+      <div class="muted">{{ product.category }}</div>
+      <p style="margin:12px 0;">{{ product.description }}</p>
+      <div class="price" style="font-size:1.4rem;">${{ '%.2f'|format(product.price) }}</div>
+      {% if current_user.is_authenticated and current_user.id != product.seller_id %}
+        <form method="post" action="{{ url_for('cart_add', pid=product.id) }}" style="margin-top:12px; display:flex; gap:8px; align-items:center;">
+          <input type="number" name="quantity" min="1" value="1" style="width:90px;">
+          <button class="btn" type="submit">Add to Cart</button>
+        </form>
+      {% else %}
+        <p class="muted" style="margin-top:12px;">(You are the seller or not logged in.)</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

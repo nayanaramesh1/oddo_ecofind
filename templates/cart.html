@@ -1,0 +1,46 @@
+{% extends "_base.html" %}
+{% block content %}
+  <h2>Your Cart</h2>
+  <table class="table">
+    <thead>
+      <tr><th>Item</th><th>Price</th><th>Qty</th><th>Subtotal</th><th></th></tr>
+    </thead>
+    <tbody>
+      {% for i in items %}
+        <tr>
+          <td style="display:flex; gap:10px; align-items:center;">
+            <img src="{{ i.product.image() }}" alt="" style="width:64px;height:48px;object-fit:cover;border-radius:6px;">
+            <div>
+              <div>{{ i.product.title }}</div>
+              <div class="muted">{{ i.product.category }}</div>
+            </div>
+          </td>
+          <td>${{ '%.2f'|format(i.product.price) }}</td>
+          <td>
+            <form method="post" action="{{ url_for('cart_update', item_id=i.id) }}" style="display:flex; gap:6px; align-items:center;">
+              <input name="quantity" type="number" min="1" value="{{ i.quantity }}" style="width:80px;">
+              <button class="btn secondary" type="submit">Update</button>
+            </form>
+          </td>
+          <td>${{ '%.2f'|format(i.product.price * i.quantity) }}</td>
+          <td>
+            <form method="post" action="{{ url_for('cart_remove', item_id=i.id) }}">
+              <button class="btn danger" type="submit">Remove</button>
+            </form>
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="5" class="muted">Your cart is empty.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div style="margin-top:12px; display:flex; justify-content:space-between; align-items:center;">
+    <div class="muted">Subtotal</div>
+    <div class="price" style="font-size:1.2rem;">${{ '%.2f'|format(subtotal) }}</div>
+  </div>
+
+  <form method="post" action="{{ url_for('checkout') }}" style="margin-top:12px;">
+    <button class="btn" type="submit" {% if not items %}disabled{% endif %}>Checkout</button>
+  </form>
+{% endblock %}

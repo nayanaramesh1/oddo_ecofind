@@ -1,0 +1,31 @@
+{% extends "_base.html" %}
+{% block content %}
+  <h2>Previous Purchases</h2>
+  {% for o in orders %}
+    <div class="card" style="margin-bottom:14px;">
+      <div class="content">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div class="muted">Order #{{ o.id }} • {{ o.created_at.strftime('%Y-%m-%d %H:%M') }}</div>
+          <div class="price">${{ '%.2f'|format(o.total_amount) }}</div>
+        </div>
+        <div class="grid" style="margin-top:10px;">
+          {% for it in o.items %}
+            <div class="card">
+              <img src="{{ it.product_image_url or 'https://placehold.co/600x400?text=EcoFinds' }}" alt="">
+              <div class="content">
+                <div style="display:flex; justify-content:space-between;">
+                  <div>{{ it.product_title }}</div>
+                  <div>x{{ it.quantity }}</div>
+                </div>
+                <div class="muted">{{ it.product_category }}</div>
+                <div>${{ '%.2f'|format(it.product_price) }}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <p class="muted">No purchases yet.</p>
+  {% endfor %}
+{% endblock %}

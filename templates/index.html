@@ -1,0 +1,41 @@
+{% extends "_base.html" %}
+{% block content %}
+  <form method="get" class="form" style="margin-bottom:16px;">
+    <div class="row">
+      <div>
+        <label for="q">Search by title</label>
+        <input type="text" id="q" name="q" value="{{ q }}" placeholder="e.g., jacket">
+      </div>
+      <div>
+        <label for="category">Filter by category</label>
+        <select id="category" name="category">
+          <option value="">All</option>
+          {% for c in categories %}
+            <option value="{{ c }}" {% if c==category %}selected{% endif %}>{{ c }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div style="margin-top:12px; display:flex; gap:8px;">
+      <button class="btn" type="submit">Apply</button>
+      <a class="btn secondary" href="{{ url_for('index') }}">Reset</a>
+    </div>
+  </form>
+
+  <div class="grid">
+    {% for p in products %}
+      <a class="card" href="{{ url_for('product_detail', pid=p.id) }}">
+        <img src="{{ p.image() }}" alt="{{ p.title }}">
+        <div class="content">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3 style="margin:0;">{{ p.title }}</h3>
+            <span class="price">${{ '%.2f'|format(p.price) }}</span>
+          </div>
+          <div class="muted">{{ p.category }}</div>
+        </div>
+      </a>
+    {% else %}
+      <p>No products found.</p>
+    {% endfor %}
+  </div>
+{% endblock %}
