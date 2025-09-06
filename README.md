@@ -1,20 +1,38 @@
-# EcoFinds – Sustainable Second-Hand Marketplace (Prototype)
+# 🌿 EcoFinds – Sustainable Second-Hand Marketplace (Prototype)
 
-A Flask-based prototype covering:
-- User registration/login
-- Profile (username) editing
-- Product listing CRUD (title, description, category, price, image URL/placeholder)
-- Browse listings with keyword search (title) & category filter
-- Product detail
-- Cart (add/update/remove) & checkout
-- Previous purchases history
+EcoFinds is a **Flask-based prototype** of a sustainable second-hand marketplace where users can buy and sell pre-loved items.  
+The project demonstrates key features of a full-fledged marketplace, focusing on **user authentication, product listings, and cart/checkout flow**.
 
-## Quickstart
+---
+
+## ✨ Features
+
+- 👤 **User Management**
+  - User registration & login  
+  - Edit profile (username)
+
+- 🛍️ **Product Listings**
+  - Create, Read, Update, Delete (CRUD) items  
+  - Each listing includes: title, description, category, price, image (URL or placeholder)
+
+- 🔎 **Browse & Search**
+  - Keyword search (title-based)  
+  - Category filtering  
+  - Product detail view
+
+- 🛒 **Cart & Orders**
+  - Add items to cart, update quantity, or remove  
+  - Checkout process  
+  - View purchase history
+
+---
+
+## 🚀 Quickstart
 
 ```bash
 python -m venv .venv
 . .venv/Scripts/activate    # Windows
-# or: source .venv/bin/activate
+# or: source .venv/bin/activate  #macOS
 
 pip install -r requirements.txt
 flask --app app.py run  # first run to create instance folder
